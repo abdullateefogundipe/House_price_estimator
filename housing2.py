@@ -20,6 +20,7 @@ location_rank = {'Gbagada':'gbagada', 'Surulere':'surulere','Ajah':'ajah','Ikeja
 'Ikoyi':'ikoyi','IyanaIpaja':'iyanaipaja','Lekki':'lekki', 'Ogba':'ogba', 'Yaba':'yaba'}
 terraced = {'Yes':'1', 'No':'0'}
 New_flag = {'Yes':'1', 'No':'0'}
+Mini_flag = {'Yes':'1', 'No':'0'}
 exec_flag = {'Low 1': '1', 'Lower Middle 2':'2','Middle Range 3':'3',' Highbrow 4':'4'}
 serviced_flag = {'Yes':'1', 'No':'0'}
 
@@ -38,7 +39,7 @@ def get_key(val, my_dict):
 #Load Model
 # def load_pred(model_file):
 #     loaded_model =  joblib.load("m")
-modelz = joblib.load("modelrf23.pkl")
+modelz = joblib.load("limitlessmodel.pkl")
 
 def main():
     """Housing Ml App"""
@@ -59,6 +60,7 @@ def main():
         locations = st.sidebar.selectbox("Your preferred location",tuple(location_rank.keys()) )
         terrace_or_not = st.sidebar.selectbox("Do you want to live in an Terracced Apartment",tuple(terraced.keys()) )
         Number_of_flag = st.sidebar.selectbox("Do you prefer a new apartment",tuple(New_flag.keys()) )
+        Number_of_mini_flag = st.sidebar.selectbox("Do you prefer a mini flat",tuple(Mini_flag.keys()) )
         exec_flagg1 = st.sidebar.selectbox("What type of apartment do you want ?",tuple(exec_flag.keys()) )
         serviced_flag1 = st.sidebar.selectbox("Do you prefer an serviced apartment",tuple(serviced_flag.keys()) )
 
@@ -67,6 +69,7 @@ def main():
         v_locations = get_value(locations,location_rank )        
         v_terrace_or_not = get_value(terrace_or_not,terraced )
         v_Number_of_flag = get_value(Number_of_flag,New_flag )
+        v_Number_of_mini_flag = get_value(Number_of_mini_flag,Mini_flag )
         v_exec_flagg1 = get_value(exec_flagg1,exec_flag )
         v_serviced_flag1 = get_value(serviced_flag1,serviced_flag )
 
@@ -83,7 +86,7 @@ def main():
             
             #Arranging predictor data in the same way model was trained
             predictor_data= [Number_of_Bedrooms,Number_of_Bathrooms,Number_of_Toilet,v_estate_or_not,locationBedRank,
-            v_terrace_or_not, v_Number_of_flag, v_exec_flagg1,v_serviced_flag1]
+            v_terrace_or_not, v_Number_of_flag, v_exec_flagg1,v_serviced_flag1,v_Number_of_mini_flag]
             predictor_data= np.array(predictor_data).reshape(1,-1)
             z= data.where(data['location']==v_locations)
             b= z.new_price.max()
