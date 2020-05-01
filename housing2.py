@@ -91,9 +91,9 @@ def main():
             predictor_data= [Number_of_Bedrooms,Number_of_Bathrooms,Number_of_Toilet,v_estate_or_not,locationBedRank,
             v_terrace_or_not, v_Number_of_flag, v_exec_flagg1,v_serviced_flag1,v_Number_of_mini_flag]
             predictor_data= np.array(predictor_data).reshape(1,-1)
-            z= data.where(data['location']==v_locations)
-            b= z.new_price.max()
-            c = z.new_price.min()
+            z = data.where(data['location']==v_locations)
+            b = z.price.max()
+            c = z.price.min()
             d = int(c)
             e = int(b)
             data['price'][(data['location']=="gbagada")&(data['bedrooms']==Number_of_Bathrooms)].plot(kind="hist")
