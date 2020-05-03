@@ -46,8 +46,17 @@ modelz = joblib.load("limitlessmodel.pkl")
 
 def main():
     """Housing Ml App"""
-    st.title("Housing Pricing App")
-    st.subheader("Built with Streamlit") 
+    st.title("WELCOME TO LIMITLESS AO LAGOS HOUSE RENT ESTIMATOR APP")
+    st.markdown("This ML app was built by Abdullateef Ogundipe  during the python@home challenge and training organized by Technidus & co") 
+    
+    st.header("Success quote")
+    st.markdown("> It always seems impossible until it’s done.\n\n—―Nelson Mandela")
+    
+    st.header("LIMITLESS AO LAGOS HOUSE RENT ESTIMATOR APP: At a glance")
+    st.markdown("The rent estimator app was built in order to help individuals to have an estimate of renting a house in Lagos within their comfort. This estimator considers many factors before giving an estimate based on the user input. such factors are:location, number of rooms, quality of house  and many more")
+    
+    st.header("Please, refer to the sidebar to pick the features of the house you wish to get an estimated rent")
+    st.markdown("Please note: To make selection at the side bar, there are some features, you will need to slide your cursor to pick, while you will need to select to pick at other features available. \n\n Enjoy")
 
     #menu
     menu = ["Prediction", "About"]
@@ -91,9 +100,9 @@ def main():
             predictor_data= [Number_of_Bedrooms,Number_of_Bathrooms,Number_of_Toilet,v_estate_or_not,locationBedRank,
             v_terrace_or_not, v_Number_of_flag, v_exec_flagg1,v_serviced_flag1,v_Number_of_mini_flag]
             predictor_data= np.array(predictor_data).reshape(1,-1)
-            z= data.where(data['location']==v_locations)
-            b= z.new_price.max()
-            c = z.new_price.min()
+            z = data.where(data['location']==v_locations)
+            b = z.price.max()
+            c = z.price.min()
             d = int(c)
             e = int(b)
             data['price'][(data['location']=="gbagada")&(data['bedrooms']==Number_of_Bathrooms)].plot(kind="hist")
